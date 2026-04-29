@@ -44,9 +44,9 @@ async function generateAndDownloadCertificate(name, certId) {
         // 6. Add the captured image to the PDF
         doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
 
-        // Make the "Verify at: www.syntrotech.online" text clickable
+        // Make the "Verify at: https://syntrocertverify.vercel.app/" text clickable
         // Creating an invisible clickable rectangle over the bottom-left text area
-        doc.link(60, pdfHeight - 80, 200, 30, { url: 'https://www.syntrotech.online' });
+        doc.link(60, pdfHeight - 80, 200, 30, { url: 'https://syntrocertverify.vercel.app/' });
 
         // 7. Trigger the download
         doc.save(`${name.replace(/\s+/g, '_')}_Certificate.pdf`);
