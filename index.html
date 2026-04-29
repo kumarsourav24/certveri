@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syntro Tech - Certificate Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="https://www.syntrotech.online" class="logo">
+                Syntro <span>Tech</span>
+            </a>
+            <div class="nav-links">
+                <button id="navVerifyBtn" class="nav-btn secondary-nav-btn">Verify Certificate</button>
+                <a href="https://www.syntrotech.online" class="nav-btn">Return to Website</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="landing-wrapper">
+        <div class="hero-grid">
+            <!-- Left Info Section -->
+            <div class="hero-content">
+                <div class="badge">Official Credentials</div>
+                <h1 class="hero-title">Verify & Download Your <span>Syntro Tech</span> Certificate</h1>
+                <p class="hero-subtitle">
+                    Access your official completion certificate instantly. Showcase your high-impact AI and development
+                    skills to top recruiters worldwide.
+                </p>
+
+                <div class="features-list">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                        </div>
+                        <div class="feature-text">
+                            <h3>Verified Authenticity</h3>
+                            <p>Every certificate comes with a unique ID for global verification.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                        </div>
+                        <div class="feature-text">
+                            <h3>Instant PDF Access</h3>
+                            <p>Download your high-resolution certificate directly to your device.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                        </div>
+                        <div class="feature-text">
+                            <h3>Lifetime Validity</h3>
+                            <p>Your achievements and project records are securely stored forever.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Form Section -->
+            <div class="hero-form">
+                <div class="glass-card">
+                    <div class="brand-header">
+                        <h2>Certificate Portal</h2>
+                        <p>Enter your registered email below</p>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="input-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" placeholder="student@example.com" autocomplete="email">
+                        </div>
+
+                        <button id="verifyBtn" class="primary-btn">
+                            Verify Email
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                style="margin-left: 8px; vertical-align: middle;">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div id="statusMessage" class="status-message hidden">
+                        <!-- Status messages will appear here -->
+                    </div>
+
+                    <div id="downloadSection" class="download-section hidden">
+                        <div class="cert-info">
+                            <p class="cert-name" id="certName">Name</p>
+                            <p class="cert-id" id="certId">ID: XXXXXX</p>
+                        </div>
+                        <button id="downloadBtn" class="success-btn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                style="margin-right: 8px; vertical-align: middle;">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                            Download Certificate
+                        </button>
+                    </div>
+
+                    <div id="loadingOverlay" class="loading-overlay hidden">
+                        <div class="spinner"></div>
+                        <p>Verifying credentials...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Verification Modal -->
+    <div id="verifyModal" class="modal hidden">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content glass-card">
+            <button id="closeModalBtn" class="close-btn">&times;</button>
+            <div class="brand-header">
+                <h2>Verify Credential</h2>
+                <p>Enter the Certificate ID to check authenticity</p>
+            </div>
+            <div class="form-section">
+                <div class="input-group">
+                    <label for="verifyIdInput">Certificate ID</label>
+                    <input type="text" id="verifyIdInput" placeholder="e.g. ST-ECOMM-2026-001">
+                </div>
+                <button id="submitVerifyBtn" class="primary-btn">
+                    Check Authenticity
+                </button>
+            </div>
+            <div id="verifyLoading" class="hidden" style="text-align: center; margin-top: 20px;">
+                <div class="spinner" style="width: 24px; height: 24px; border-width: 2px;"></div>
+            </div>
+            <div id="verifyResultContainer" class="verify-result hidden">
+                <!-- Results injected here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden Certificate Template for HTML2Canvas -->
+    <div id="certificate-container" style="position: absolute; left: -9999px; top: -9999px;">
+        <div id="certificate-dom" class="certificate-layout">
+            <!-- Background Watermark -->
+            <div class="cert-watermark">SYNTRO TECH</div>
+
+            <div class="cert-border-outer">
+                <div class="cert-border-inner">
+                    <div class="cert-border-core">
+
+                        <!-- Corner Ornaments -->
+                        <div class="corner corner-tl"></div>
+                        <div class="corner corner-tr"></div>
+                        <div class="corner corner-bl"></div>
+                        <div class="corner corner-br"></div>
+
+                        <div class="cert-header">
+                            <img src="logo.png" alt="Syntro Tech Logo" class="cert-logo">
+                            <h2 class="cert-title">CERTIFICATE OF COMPLETION</h2>
+                            <p class="cert-subtitle">This official credential is proudly awarded to</p>
+                        </div>
+
+                        <div class="cert-body">
+                            <h1 id="pdfName" class="cert-student-name">Student Name</h1>
+                            <div class="cert-divider-ornamental"></div>
+                            <p class="cert-description">In recognition of their outstanding performance and successful
+                                completion of the intensive professional training program:</p>
+                            <h3 class="cert-course">Build Your First E-Commerce App LIVE</h3>
+                            <p class="cert-subtext">The candidate has demonstrated exceptional technical proficiency,
+                                practical implementation skills, and a commitment to professional excellence.</p>
+                        </div>
+
+                        <div class="cert-footer">
+                            <div class="cert-meta-group">
+                                <p id="pdfDate" class="cert-meta-label">Date of Issue: <span>01/01/2026</span></p>
+                                <p id="pdfId" class="cert-meta-label">Credential ID: <span>ST-0000</span></p>
+                                <p class="cert-meta-verify">Verify at: www.syntrotech.online</p>
+                            </div>
+
+                            <div class="cert-seal-container">
+                                <div class="cert-seal">
+                                    <div class="cert-seal-inner">
+                                        <span class="seal-text-top">CERTIFIED</span>
+                                        <div class="stars" style="margin-top: 8px; font-size: 16px;">★★★</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="cert-signature-section">
+                                <img src="program sign.png" alt="Signature" class="cert-signature-img">
+                                <div class="cert-signature-line"></div>
+                                <p class="cert-sig-name">Program Director</p>
+                                <p class="cert-sig-title">Syntro Tech Education</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase.js"></script>
+    <script src="certificate.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
